@@ -298,9 +298,9 @@ external_module(<<"DSA">>) -> amf_AsyncMessage;
 external_module(<<"DSC">>) -> amf_CommandMessage;
 external_module(<<"DSK">>) -> amf_AcknowledgeMessage;
 external_module(Name) ->
-    case application:get_env(amf_mapper) of
+    case application:get_env(amf, resolver) of
         undefined -> throw({unknown_externalized_class, Name});
-        {ok, AmfMapper} -> AmfMapper:get_mapping(Name)
+        {ok, Resolver} -> Resolver:get_mapping(Name)
     end.
 
 %% @doc Encodes a value.
